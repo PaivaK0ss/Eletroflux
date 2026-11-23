@@ -1,217 +1,327 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EletroFlux | Outsourcing e Montagem de Circuitos Eletrônicos</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Eletroflux | Transformação Tecnológica e Infraestrutura Integrada</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#0A192F',
-                            navy: '#0E2A47',
-                            blue: '#0052CC',
-                            light: '#00A3FF',
-                            accent: '#00E5FF',
-                            slate: '#F4F7FA',
-                            text: '#1E293B'
+                            dark: '#030712',
+                            navy: '#0F172A',
+                            slate: '#1E293B',
+                            card: 'rgba(15, 23, 42, 0.75)',
+                            blue: '#2563EB',
+                            cyan: '#06B6D4',
+                            sky: '#38BDF8',
+                            emerald: '#10B981',
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.35)',
+                        'glow-sky': '0 0 25px -5px rgba(56, 189, 248, 0.35)',
+                        'glow-blue': '0 0 35px -5px rgba(37, 99, 235, 0.4)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .circuit-bg {
-            background-color: #0A192F;
-            background-image: radial-gradient(#00A3FF 0.75px, transparent 0.75px), radial-gradient(#00A3FF 0.75px, #0A192F 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            background-opacity: 0.05;
+        ::-webkit-scrollbar-track {
+            background: #030712;
         }
-        .glow-effect {
-            box-shadow: 0 0 25px -5px rgba(0, 163, 255, 0.3);
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
         }
-        .glow-effect:hover {
-            box-shadow: 0 0 35px 0px rgba(0, 163, 255, 0.5);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06B6D4;
+        }
+        
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+        }
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #38BDF8 0%, #06B6D4 50%, #2563EB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(90deg, #06B6D4, #2563EB, #38BDF8);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .gradient-border:hover::before {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-light selection:text-white">
+<body class="bg-brand-dark text-slate-100 font-sans selection:bg-brand-cyan selection:text-brand-dark overflow-x-hidden">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800 text-white transition-all">
+    <!-- CANVAS CYBER BACKGROUND (HERO ONLY) -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-40">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-[30rem] h-[30rem] bg-brand-blue/10 rounded-full blur-[150px]"></div>
+    </div>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
                 <!-- BRAND LOGO -->
                 <a href="#" class="flex items-center gap-3 group">
-                    <div class="relative w-10 h-10 flex items-center justify-center bg-brand-navy rounded-lg border border-brand-light/30 group-hover:border-brand-light transition-all">
-                        <!-- Custom SVG Circuit/Flux Icon based on generated concept -->
-                        <svg class="w-6 h-6 text-brand-light transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 12h4l2-3 3 6 3-6 2 3h4" />
-                            <circle cx="6" cy="12" r="1" fill="currentColor"/>
-                            <circle cx="18" cy="12" r="1" fill="currentColor"/>
-                            <circle cx="12" cy="9" r="1.5" class="text-brand-accent" fill="currentColor"/>
-                        </svg>
+                    <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-brand-cyan via-brand-blue to-slate-900 p-0.5 shadow-glow-cyan group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-brand-dark rounded-[10px] flex items-center justify-center overflow-hidden relative">
+                            <!-- Circuit SVG Overlay -->
+                            <svg class="w-6 h-6 text-brand-cyan group-hover:text-brand-sky transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xl font-extrabold tracking-tight text-white leading-none">ELETRO<span class="text-brand-light">FLUX</span></span>
-                        <span class="text-[10px] font-medium tracking-widest text-slate-400 uppercase mt-0.5">Circuit Assembly</span>
+                        <span class="text-xl font-extrabold tracking-wider text-white flex items-center gap-1">
+                            ELETRO<span class="text-brand-cyan">FLUX</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-slate-400 tracking-widest uppercase">Engenharia & TI Integrada</span>
                     </div>
                 </a>
 
-                <!-- DESKTOP NAV -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="#solucoes" class="text-slate-300 hover:text-brand-light transition-colors">Soluções</a>
-                    <a href="#diferenciais" class="text-slate-300 hover:text-brand-light transition-colors">Diferenciais</a>
-                    <a href="#processo" class="text-slate-300 hover:text-brand-light transition-colors">Processo EMS</a>
-                    <a href="#capacidade" class="text-slate-300 hover:text-brand-light transition-colors">Capacidade</a>
-                    <a href="#orcamento" class="text-slate-300 hover:text-brand-light transition-colors">Solicitar Orçamento</a>
+                <!-- DESKTOP NAVIGATION -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#hero" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Início</a>
+                    <a href="#servicos" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Portfólio de Serviços</a>
+                    <a href="#calculadora" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Dimensionador</a>
+                    <a href="#metodologia" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Metodologia</a>
+                    <a href="#diferenciais" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Diferenciais</a>
+                    <a href="#equipe" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-brand-cyan hover:bg-slate-800/40 rounded-lg transition-colors">Nossa Equipe</a>
                 </nav>
 
-                <!-- HEADER CTA -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#orcamento" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-blue hover:bg-brand-light rounded-lg shadow-lg shadow-brand-blue/30 transition-all duration-200">
-                        <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Cotar Lote B2B
-                    </a>
-                </div>
-
-                <!-- MOBILE MENU BUTTON -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                <!-- HEADER CTA & MOBILE MENU BUTTON -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openModal()" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-slate-950 bg-gradient-to-r from-brand-cyan via-brand-sky to-brand-blue hover:brightness-110 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-glow-cyan active:translate-y-0">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
+                        Solicitar Orçamento
+                    </button>
+                    
+                    <!-- Mobile Hamburger -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none" aria-label="Toggle Menu">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon-open"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="menu-icon-close"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- MOBILE NAV MENU -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
-            <a href="#solucoes" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Soluções</a>
-            <a href="#diferenciais" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Diferenciais</a>
-            <a href="#processo" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Processo EMS</a>
-            <a href="#capacidade" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Capacidade</a>
-            <a href="#orcamento" class="block w-full text-center mt-4 px-5 py-3 text-sm font-semibold text-white bg-brand-blue rounded-lg shadow-md">Solicitar Orçamento</a>
+        <!-- MOBILE MENU DRAWER -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-brand-navy/95 backdrop-blur-2xl px-4 pt-3 pb-6 space-y-2">
+            <a href="#hero" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Início</a>
+            <a href="#servicos" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Portfólio de Serviços</a>
+            <a href="#calculadora" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Dimensionador Interativo</a>
+            <a href="#metodologia" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Metodologia</a>
+            <a href="#diferenciais" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Diferenciais</a>
+            <a href="#equipe" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-cyan">Nossa Equipe</a>
+            <div class="pt-3 border-t border-slate-800">
+                <button onclick="openModal()" class="w-full py-3 px-4 text-center font-semibold text-slate-950 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-xl shadow-glow-cyan">
+                    Solicitar Orçamento
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative bg-brand-dark text-white overflow-hidden py-20 lg:py-28 circuit-bg border-b border-slate-800">
-        <!-- Glow accents -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-light/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section id="hero" class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+        <!-- Interactive Node Canvas Layer -->
+        <canvas id="hero-canvas" class="absolute inset-0 z-0 pointer-events-none opacity-30"></canvas>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- HERO TEXT -->
+                <!-- Left Content Column -->
                 <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-navy border border-brand-light/30 text-brand-light text-xs font-semibold uppercase tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-                        Manufatura de Eletrônicos por Contrato (EMS)
+                    
+                    <!-- Tech Pill Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-brand-cyan/30 text-brand-sky text-xs font-semibold tracking-wide uppercase shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                        Infraestrutura Mission-Critical & Cloud Integration
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                        Especialistas na <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-light to-brand-accent">Montagem Precision</span> de Placas Eletrônicas
+                    <!-- Main Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                        Transformação Tecnológica e <span class="gradient-text">Infraestrutura Integrada</span>
                     </h1>
 
-                    <p class="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Terceirização industrial completa para a sua empresa. Da prototipagem rápida à montagem em grande escala SMT e THT com rigoroso controle de qualidade IPC-A-610.
+                    <!-- Detailed Subtitle -->
+                    <p class="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
+                        A <strong class="text-white font-semibold">Eletroflux</strong> entrega soluções de ponta a ponta em <strong>engenharia elétrica</strong>, <strong>infraestrutura de TI</strong>, <strong>segurança eletrônica</strong> e <strong>computação em nuvem</strong>. Combinamos consultoria especializada e execução operacional para garantir alta disponibilidade, segurança e continuidade absoluta aos negócios corporativos e industriais.
                     </p>
 
-                    <!-- CTA BUTTONS -->
+                    <!-- CTAs -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#orcamento" class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-brand-blue hover:bg-brand-light rounded-xl shadow-lg shadow-brand-blue/40 transition-all duration-300 flex items-center justify-center gap-2 group">
-                            Enviar Projeto para Cotação
-                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        <a href="#servicos" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-950 bg-gradient-to-r from-brand-cyan via-brand-sky to-brand-blue hover:brightness-110 rounded-xl transition-all transform hover:-translate-y-1 shadow-glow-cyan">
+                            Explorar Serviços
+                            <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
                         </a>
-                        <a href="#solucoes" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all duration-200 text-center">
-                            Conhecer Nossos Serviços
-                        </a>
+                        <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-brand-cyan/50 rounded-xl transition-all">
+                            <i data-lucide="headphones" class="w-5 h-5 mr-2 text-brand-cyan"></i>
+                            Falar com Especialista
+                        </button>
                     </div>
 
-                    <!-- TRUST METRICS -->
-                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-800/80">
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-white">99.8%</p>
-                            <p class="text-xs text-slate-400 mt-1">Taxa de Qualidade (Yield)</p>
+                    <!-- Key Enterprise Badges Grid -->
+                    <div class="pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+                        <div class="p-3 rounded-lg bg-slate-900/40 border border-slate-800">
+                            <div class="text-2xl font-extrabold text-brand-cyan">100%</div>
+                            <div class="text-xs text-slate-400 font-medium">Conformidade Normativa</div>
                         </div>
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-light">+500k</p>
-                            <p class="text-xs text-slate-400 mt-1">Componentes/Dia</p>
+                        <div class="p-3 rounded-lg bg-slate-900/40 border border-slate-800">
+                            <div class="text-2xl font-extrabold text-brand-sky">Zero</div>
+                            <div class="text-xs text-slate-400 font-medium">Downtime em Migrações</div>
                         </div>
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-white">ISO 9001</p>
-                            <p class="text-xs text-slate-400 mt-1">Padrão Certificado</p>
+                        <div class="p-3 rounded-lg bg-slate-900/40 border border-slate-800">
+                            <div class="text-2xl font-extrabold text-blue-400">Precision</div>
+                            <div class="text-xs text-slate-400 font-medium">Instrumentação Digital</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/40 border border-slate-800">
+                            <div class="text-2xl font-extrabold text-brand-cyan">Turnkey</div>
+                            <div class="text-xs text-slate-400 font-medium">Projetos Ponta a Ponta</div>
                         </div>
                     </div>
+
                 </div>
 
-                <!-- HERO GRAPHIC CARD -->
-                <div class="lg:col-span-5">
-                    <div class="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-b from-slate-900 to-brand-navy p-6 sm:p-8 rounded-2xl border border-slate-700/60 shadow-2xl">
+                <!-- Right Visual Hero Graphic / Interactive Blueprint Preview -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Neon Glow Ring -->
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-sky opacity-30 blur-xl animate-pulse-slow"></div>
                         
-                        <!-- Header badge -->
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                <span class="text-xs font-mono text-slate-300">LINHA_DE_MONTAGEM_01: ATIVA</span>
+                        <!-- Main Visual Card -->
+                        <div class="relative glass-panel rounded-2xl p-6 sm:p-8 space-y-6 border-slate-700/60 shadow-2xl">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <span class="text-xs font-mono text-slate-400 ml-2">ELETROFLUX_CORE_MONITOR v4.2</span>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30">ONLINE</span>
                             </div>
-                            <span class="text-xs text-brand-light font-semibold">Tecnologia SMT/PTH</span>
-                        </div>
 
-                        <!-- Circuit Visual Schematic simulation -->
-                        <div class="bg-brand-dark/90 p-5 rounded-xl border border-slate-800 space-y-4 font-mono text-xs text-slate-300 mb-6">
-                            <div class="flex justify-between items-center text-slate-400 border-b border-slate-800/50 pb-2">
-                                <span>PARÂMETRO</span>
-                                <span>ESPECIFICAÇÃO</span>
+                            <!-- Interactive Dashboard Widget Mock -->
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2.5 rounded-lg bg-blue-500/10 text-brand-sky">
+                                            <i data-lucide="zap" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-mono text-slate-400">AUTOMAÇÃO ELÉTRICA</h4>
+                                            <p class="text-sm font-semibold text-white">Painéis e Dimensionamento</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono text-emerald-400 font-semibold">ESTÁVEL</span>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2.5 rounded-lg bg-cyan-500/10 text-brand-cyan">
+                                            <i data-lucide="server" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-mono text-slate-400">INFRAESTRUTURA DE TI</h4>
+                                            <p class="text-sm font-semibold text-white">Ativos, Server & Redes</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono text-emerald-400 font-semibold">OTIMIZADO</span>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2.5 rounded-lg bg-purple-500/10 text-purple-400">
+                                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-mono text-slate-400">SEGURANÇA & CFTV</h4>
+                                            <p class="text-sm font-semibold text-white">VMS & Monitoramento 24h</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono text-emerald-400 font-semibold">ATIVO</span>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2.5 rounded-lg bg-sky-500/10 text-sky-400">
+                                            <i data-lucide="cloud" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-mono text-slate-400">CLOUD COMPUTING</h4>
+                                            <p class="text-sm font-semibold text-white">Nuvem e Continuidadade</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-mono text-emerald-400 font-semibold">ZERO LOSS</span>
+                                </div>
                             </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Tecnologia:</span>
-                                <span class="text-white font-semibold">SMD 0201 até BGA/QFN</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Inspeção Óptica:</span>
-                                <span class="text-brand-light font-semibold">AOI 3D Automática</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Capacidade THT:</span>
-                                <span class="text-white font-semibold">Soldagem Dupla Onda</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">Conformidade:</span>
-                                <span class="text-emerald-400 font-semibold">IPC-A-610 Classe 2 e 3</span>
+
+                            <!-- Interactive Footnote -->
+                            <div class="p-3 rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 text-center text-xs text-brand-sky font-medium flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i>
+                                Arquitetura Turnkey Pronta para Implantação
                             </div>
                         </div>
-
-                        <!-- Quick feature list -->
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-light shrink-0 mt-0.5"></i>
-                                <p class="text-sm text-slate-300">Gerenciamento completo da cadeia de suprimentos de componentes (BOM).</p>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-light shrink-0 mt-0.5"></i>
-                                <p class="text-sm text-slate-300">Testes funcionais (FCT) e In-Circuit (ICT) dedicados ao seu produto.</p>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -219,82 +329,1581 @@
         </div>
     </section>
 
-    <!-- LOGOS DE CLIENTES / PARCEIROS -->
-    <section class="py-8 bg-slate-900 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6">Atendendo indústrias exigentes em todo o Brasil</p>
-            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all">
-                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="cpu" class="w-5 h-5"></i> AUTOMOTIVA</span>
-                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="wifi" class="w-5 h-5"></i> TELECOM</span>
-                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5"></i> MEDTECH</span>
-                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5"></i> ENERGIA</span>
-                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="bot" class="w-5 h-5"></i> AUTOMAÇÃO</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVIÇOS / SOLUÇÕES -->
-    <section id="solucoes" class="py-20 lg:py-28 bg-white">
+    <!-- PORTFÓLIO DE SERVIÇOS (5 PILARES COM INTERATIVIDADE) -->
+    <section id="servicos" class="py-20 relative z-10 bg-slate-950/60 border-t border-slate-800/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-extrabold text-brand-blue uppercase tracking-widest mb-2">Nossas Soluções EMS</h2>
-                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Serviços de Manufatura de Circuitos sob Medida</p>
-                <p class="text-slate-600 mt-4 text-lg">Oferecemos soluções completas para terceirização da montagem dos seus produtos eletroeletrônicos.</p>
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+                <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20">
+                    Capacidade Técnica Abrangente
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Portfólio Integrado de Engenharia e Tecnologia
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Soluções modulares ou combinadas com consultoria estratégica, projeto executivo e comissionamento de alta precisão.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Card 1: Montagem SMT -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
-                            <i data-lucide="microchip" class="w-7 h-7"></i>
+            <!-- Filter Navigation Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-12" id="service-filters">
+                <button onclick="filterServices('all')" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-brand-cyan text-brand-dark shadow-glow-cyan" data-filter="all">
+                    Todos os Pilares
+                </button>
+                <button onclick="filterServices('eletrica')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-brand-cyan/40 transition-all" data-filter="eletrica">
+                    <i data-lucide="zap" class="w-4 h-4 inline mr-1 text-amber-400"></i> Engenharia Elétrica
+                </button>
+                <button onclick="filterServices('ti')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-brand-cyan/40 transition-all" data-filter="ti">
+                    <i data-lucide="cpu" class="w-4 h-4 inline mr-1 text-blue-400"></i> TI & Hardware
+                </button>
+                <button onclick="filterServices('redes')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-brand-cyan/40 transition-all" data-filter="redes">
+                    <i data-lucide="network" class="w-4 h-4 inline mr-1 text-cyan-400"></i> Redes & Cabeamento
+                </button>
+                <button onclick="filterServices('cftv')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-brand-cyan/40 transition-all" data-filter="cftv">
+                    <i data-lucide="shield" class="w-4 h-4 inline mr-1 text-purple-400"></i> Segurança & CFTV
+                </button>
+                <button onclick="filterServices('cloud')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-brand-cyan/40 transition-all" data-filter="cloud">
+                    <i data-lucide="cloud" class="w-4 h-4 inline mr-1 text-sky-400"></i> Cloud Computing
+                </button>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
+
+                <!-- CARD 1: Engenharia Elétrica -->
+                <div class="service-card glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="eletrica">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                                <i data-lucide="zap" class="w-7 h-7"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">PILAR 01</span>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">Montagem SMT</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                            Linhas pick-and-place automáticas de alta velocidade para montagem em superfície (SMD), componentes de micro-precisão e encapsulamentos BGA.
-                        </p>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">1. Engenharia Elétrica e Automação Operacional</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Garantia de segurança, conformidade normativa e eficiência energética para instalações comerciais e industriais críticas.
+                            </p>
+                        </div>
+
+                        <!-- Sub-items Accordion Container -->
+                        <div class="space-y-3 border-t border-slate-800/80 pt-4">
+                            
+                            <!-- Sub 1.1 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                                    Consultoria Técnica e Diagnóstico
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Dimensionamento de cargas elétricas, adequação rigorosa às normas de segurança vigentes (NR-10/NBR) e auditoria técnica de instalações existentes.
+                                </p>
+                            </div>
+
+                            <!-- Sub 1.2 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                                    Serviços Especializados de Automação
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Verificação técnica avançada com instrumentação digital de precisão, ensaios operacionais em ambientes críticos e projetos customizados de automação e controle.
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
-                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Componentes a partir de 0201</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Fornos de Refluxo Multizona</li>
-                    </ul>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <button onclick="openModalWithService('Engenharia Elétrica e Automação Operacional')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all flex items-center justify-center gap-2">
+                            <span>Solicitar Diagnóstico Elétrico</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Card 2: Montagem THT/PTH -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                <!-- CARD 2: Infraestrutura de TI -->
+                <div class="service-card glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="ti">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                                <i data-lucide="cpu" class="w-7 h-7"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">PILAR 02</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">2. Infraestrutura de TI, Hardware e Licenciamento</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Gerenciamento completo do ciclo de vida de ativos tecnológicos para otimizar o desempenho e a estabilidade corporativa.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 border-t border-slate-800/80 pt-4">
+                            <!-- Sub 2.1 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                                    Consultoria em Ativos Tecnológicos
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Dimensionamento assertivo do parque tecnológico corporativo e elaboração de orçamentos perfeitamente alinhados à demanda operacional real.
+                                </p>
+                            </div>
+
+                            <!-- Sub 2.2 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                                    Gestão de Hardware e Testes
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Montagem, manutenção preventiva/corretiva, testes de estresse, verificação contínua de desempenho e inventário técnico completo.
+                                </p>
+                            </div>
+
+                            <!-- Sub 2.3 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                                    Gestão de Software e Redes
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Aquisição e licenciamento corporativo OS/Software, suporte especializado e parametrização de redes com foco em segurança da informação.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <button onclick="openModalWithService('Infraestrutura de TI, Hardware e Licenciamento')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition-all flex items-center justify-center gap-2">
+                            <span>Cotar Parque de TI</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 3: Redes de Dados e Cabeamento -->
+                <div class="service-card glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="redes">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-brand-cyan">
+                                <i data-lucide="network" class="w-7 h-7"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-brand-cyan bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20">PILAR 03</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">3. Redes de Dados e Cabeamento Estruturado</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Arquitetura de conectividade ágil, ultra segura e escalável para sustentar operações corporativas de alto tráfego.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 border-t border-slate-800/80 pt-4">
+                            <!-- Sub 3.1 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                    Engenharia de Projeto In Loco
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Visita técnica presencial, levantamento minucioso de requisitos lógicos e físicos, e elaboração de layout estruturado integrando infraestrutura elétrica e segurança.
+                                </p>
+                            </div>
+
+                            <!-- Sub 3.2 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                    Planejamento Financeiro & Insumos (BOM)
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Especificação completa da Bill of Materials (BOM) com orçamentação transparente de periféricos, ativos de rede e serviços de instalação qualificada.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <button onclick="openModalWithService('Redes de Dados e Cabeamento Estruturado')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-brand-cyan bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all flex items-center justify-center gap-2">
+                            <span>Solicitar Projeto de Cabeamento</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: Segurança Eletrônica / CFTV -->
+                <div class="service-card glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="cftv">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                                <i data-lucide="video" class="w-7 h-7"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-full border border-purple-500/20">PILAR 04</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">4. Segurança Eletrônica e Monitoramento (CFTV)</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Proteção patrimonial e vigilância operacional inteligente para ambientes corporativos e plantas industriais.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 border-t border-slate-800/80 pt-4">
+                            <!-- Sub 4.1 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                    Análise de Riscos e Vistoria
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Inspeção técnica local para mapeamento detalhado de pontos vulneráveis e definição exata dos requisitos operacionais de proteção.
+                                </p>
+                            </div>
+
+                            <!-- Sub 4.2 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                    Dimensionamento do Sistema VMS
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Projeto de layout de cobertura visual, seleção de tecnologias de captura HD/4K/IA e dimensionamento de centrais VMS e armazenamento.
+                                </p>
+                            </div>
+
+                            <!-- Sub 4.3 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                    Implantação Integrada
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Levantamento e fornecimento de periféricos, especificação de hardware corporativo e proposta comercial parametrizada.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <button onclick="openModalWithService('Segurança Eletrônica e Monitoramento em Vídeo (CFTV)')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-purple-400 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 transition-all flex items-center justify-center gap-2">
+                            <span>Solicitar Estudo de CFTV</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 5: Cloud Computing -->
+                <div class="service-card glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-category="cloud">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-brand-sky">
+                                <i data-lucide="cloud-lightning" class="w-7 h-7"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-brand-sky bg-sky-500/10 px-2.5 py-1 rounded-full border border-sky-500/20">PILAR 05</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">5. Cloud Computing e Transformação Digital</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Modernização completa de infraestrutura focada em redução de custos operacionais, alta flexibilidade e alta disponibilidade.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 border-t border-slate-800/80 pt-4">
+                            <!-- Sub 5.1 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-sky shrink-0"></i>
+                                    Diagnóstico e Seleção de Provedor
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Análise profunda de cargas de trabalho, benchmarking multicloud e recomendação do modelo ideal (IaaS, PaaS, Nuvem Híbrida).
+                                </p>
+                            </div>
+
+                            <!-- Sub 5.2 -->
+                            <div class="rounded-xl bg-slate-950/70 border border-slate-800/60 p-3.5">
+                                <h4 class="text-sm font-semibold text-slate-100 flex items-center gap-2 mb-1">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-sky shrink-0"></i>
+                                    Migração Híbrida sem Paralisação
+                                </h4>
+                                <p class="text-xs text-slate-400 leading-normal pl-6">
+                                    Planejamento e execução de migração para nuvem com zero impacto na continuidade dos negócios da sua empresa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <button onclick="openModalWithService('Cloud Computing e Transformação Digital')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-brand-sky bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 transition-all flex items-center justify-center gap-2">
+                            <span>Planejar Migração Cloud</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD PROMOTIONAL INTEGRATED TURNKEY -->
+                <div class="service-card glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-brand-cyan/40 bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-brand-navy" data-category="all">
+                    <div class="space-y-6">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-cyan/20 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan">
                             <i data-lucide="layers" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">Montagem THT / PTH</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                            Inserção e soldagem convencional através de furo passante com máquinas de solda a onda controladas e operadores treinados.
-                        </p>
-                    </div>
-                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Soldagem Dupla Onda</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Montagens Mistas (SMD + THT)</li>
-                    </ul>
-                </div>
-
-                <!-- Card 3: Prototipagem Rápida -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
-                            <i data-lucide="zap" class="w-7 h-7"></i>
+                        <div>
+                            <span class="text-xs font-mono font-bold text-brand-cyan uppercase tracking-widest">Projeto Turnkey Unificado</span>
+                            <h3 class="text-2xl font-black text-white mt-1 mb-3">Integração Total de Infraestrutura</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Contrate a engenharia elétrica, TI, cabeamento, CFTV e nuvem em um único interlocutor técnico. Economia de escala, previsibilidade e gestão centralizada.
+                            </p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">Prototipagem Rápida</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                            Produção express de pequenos lotes para testes e validação de projeto (NPI - New Product Introduction) em prazos reduzidos.
+                        <ul class="space-y-2 text-xs text-slate-300 font-medium">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Único PMO de Projeto</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Compatibilização Elétrica + Lógica</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i> Garantia Integrada de Fábrica e Serviço</li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800">
+                        <button onclick="openModalWithService('Projeto Turnkey Completo (Todos os Pilares)')" class="w-full py-3 px-4 rounded-xl text-xs font-extrabold text-slate-950 bg-gradient-to-r from-brand-cyan to-brand-blue hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-glow-cyan">
+                            <span>Solicitar Proposta Turnkey</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE INFRASTRUCTURE SCOPE CALCULATOR / SIMULATOR -->
+    <section id="calculadora" class="py-20 relative z-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border-brand-cyan/30 relative overflow-hidden">
+                <!-- Background Accent Glow -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Form Controls Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="text-xs font-mono font-bold text-brand-cyan uppercase tracking-wider">Simulador de Projeto B2B</span>
+                            <h2 class="text-3xl font-extrabold text-white mt-1">Dimensionador Rápido de Infraestrutura</h2>
+                            <p class="text-slate-300 text-sm mt-2">
+                                Selecione as características do seu ambiente corporativo para obter um diagnóstico inicial e recomendação de arquitetura técnica.
+                            </p>
+                        </div>
+
+                        <!-- Facility Type -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider">1. Tipo de Instalação</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <button type="button" onclick="setCalcEnv('corporativo')" class="calc-env-btn active py-3 px-3 rounded-xl border border-brand-cyan bg-brand-cyan/20 text-white text-xs font-semibold text-center transition-all" data-env="corporativo">
+                                    <i data-lucide="building-2" class="w-5 h-5 mx-auto mb-1 text-brand-cyan"></i>
+                                    Escritório
+                                </button>
+                                <button type="button" onclick="setCalcEnv('industria')" class="calc-env-btn py-3 px-3 rounded-xl border border-slate-800 bg-slate-950/80 text-slate-400 text-xs font-semibold text-center transition-all" data-env="industria">
+                                    <i data-lucide="factory" class="w-5 h-5 mx-auto mb-1 text-slate-400"></i>
+                                    Indústria
+                                </button>
+                                <button type="button" onclick="setCalcEnv('datacenter')" class="calc-env-btn py-3 px-3 rounded-xl border border-slate-800 bg-slate-950/80 text-slate-400 text-xs font-semibold text-center transition-all" data-env="datacenter">
+                                    <i data-lucide="server" class="w-5 h-5 mx-auto mb-1 text-slate-400"></i>
+                                    Data Center
+                                </button>
+                                <button type="button" onclick="setCalcEnv('logistica')" class="calc-env-btn py-3 px-3 rounded-xl border border-slate-800 bg-slate-950/80 text-slate-400 text-xs font-semibold text-center transition-all" data-env="logistica">
+                                    <i data-lucide="boxes" class="w-5 h-5 mx-auto mb-1 text-slate-400"></i>
+                                    Galpão/Logística
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Scale Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <label class="font-semibold text-slate-300 uppercase tracking-wider">2. Porte da Instalação / Área ou Usuários</label>
+                                <span class="text-brand-cyan font-bold font-mono text-sm" id="calc-scale-label">50 - 150 Posições / Estações</span>
+                            </div>
+                            <input type="range" id="calc-scale" min="1" max="4" value="2" oninput="updateCalculator()" class="w-full accent-brand-cyan bg-slate-800 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Checkbox Pillars -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider">3. Pilares Desejados</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800 cursor-pointer text-xs font-medium">
+                                    <input type="checkbox" checked onchange="updateCalculator()" id="chk-eletrica" class="rounded border-slate-700 text-brand-cyan focus:ring-brand-cyan">
+                                    Engenharia Elétrica
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800 cursor-pointer text-xs font-medium">
+                                    <input type="checkbox" checked onchange="updateCalculator()" id="chk-ti" class="rounded border-slate-700 text-brand-cyan focus:ring-brand-cyan">
+                                    Hardware & TI
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800 cursor-pointer text-xs font-medium">
+                                    <input type="checkbox" checked onchange="updateCalculator()" id="chk-redes" class="rounded border-slate-700 text-brand-cyan focus:ring-brand-cyan">
+                                    Redes & Cabeamento
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800 cursor-pointer text-xs font-medium">
+                                    <input type="checkbox" checked onchange="updateCalculator()" id="chk-cftv" class="rounded border-slate-700 text-brand-cyan focus:ring-brand-cyan">
+                                    CFTV & Segurança
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800 cursor-pointer text-xs font-medium">
+                                    <input type="checkbox" onchange="updateCalculator()" id="chk-cloud" class="rounded border-slate-700 text-brand-cyan focus:ring-brand-cyan">
+                                    Cloud Migration
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Calculated Blueprint Box -->
+                    <div class="lg:col-span-5 bg-slate-950/90 border border-brand-cyan/30 rounded-2xl p-6 space-y-6 shadow-2xl relative">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <span class="text-xs font-mono text-brand-cyan font-bold flex items-center gap-1.5">
+                                <i data-lucide="sliders" class="w-4 h-4"></i> RECOMENDAÇÃO TÉCNICA ELETROFLUX
+                            </span>
+                            <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded">PRÉ-QUALIFICADO</span>
+                        </div>
+
+                        <div class="space-y-4 text-xs">
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-900">
+                                <span class="text-slate-400">Capacidade Recomendada:</span>
+                                <span class="font-bold text-white font-mono" id="res-power">45 kVA Subestação / UPS</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-900">
+                                <span class="text-slate-400">Pontos de Cabeamento Cat6A:</span>
+                                <span class="font-bold text-brand-cyan font-mono" id="res-cabling">120 Pontos Certificados</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-900">
+                                <span class="text-slate-400">Câmeras CFTV 4K / VMS:</span>
+                                <span class="font-bold text-purple-400 font-mono" id="res-cctv">16 Câmeras com IA</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-900">
+                                <span class="text-slate-400">Tempo de Implantação Estimado:</span>
+                                <span class="font-bold text-brand-sky font-mono" id="res-time">15 a 25 Dias Úteis</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-slate-900">
+                                <span class="text-slate-400">Documentação Incluída:</span>
+                                <span class="font-bold text-emerald-400 font-mono">BOM + Laudo ART</span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
+                            <strong>Obs:</strong> Valores e dados gerados são uma prévia conceitual. A visita técnica presencial é realizada para o projeto definitivo.
+                        </div>
+
+                        <button onclick="exportCalcToModal()" class="w-full py-3 px-4 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-brand-cyan via-brand-sky to-brand-blue hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-glow-cyan">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            Exportar este Escopo para Orçamento
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODOLOGIA DE ATENDIMENTO (3 ETAPAS) -->
+    <section id="metodologia" class="py-20 relative z-10 bg-slate-950/80 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20">
+                    Engenharia Sem Surpresas
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Metodologia de Atendimento Eletroflux
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Nossa atuação é rigorosamente estruturada em 3 etapas sequenciais para garantir previsibilidade financeira, cumprimento de prazos e excelência operacional.
+                </p>
+            </div>
+
+            <!-- Steps Timeline Grid -->
+            <div class="grid md:grid-cols-3 gap-8 relative">
+                
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-cyan/20 via-brand-blue/40 to-brand-cyan/20 -translate-y-12 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="glass-panel glass-panel-hover rounded-2xl p-8 relative z-10 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-cyan/20 to-slate-900 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan font-black text-xl shadow-glow-cyan">
+                                01
+                            </div>
+                            <span class="text-[10px] font-mono font-bold text-brand-cyan bg-brand-cyan/10 px-2.5 py-1 rounded-full border border-brand-cyan/20">DIAGNÓSTICO</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Visita Técnica e Mapeamento</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Diagnóstico aprofundado in loco das reais necessidades, restrições físicas, elétricas e de rede do ambiente operacional do cliente.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                Vistoria presencial por engenheiros qualificados
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                Mapeamento de gargalos e riscos térmicos/elétricos
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                Levantamento de interferências físicas e lógicas
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-panel glass-panel-hover rounded-2xl p-8 relative z-10 flex flex-col justify-between border-brand-sky/40">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-sky/20 to-slate-900 border border-brand-sky/40 flex items-center justify-center text-brand-sky font-black text-xl shadow-glow-sky">
+                                02
+                            </div>
+                            <span class="text-[10px] font-mono font-bold text-brand-sky bg-brand-sky/10 px-2.5 py-1 rounded-full border border-brand-sky/20">PROJETO EXECUTIVE</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Engenharia e Especificação</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Apresentação detalhada do layout executivo, lista quantitativa de materiais/equipamentos (BOM) e proposta financeira 100% transparente.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-sky shrink-0 mt-0.5"></i>
+                                Desenho de planta baixa e diagrama unifilar
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-sky shrink-0 mt-0.5"></i>
+                                Especificação rigorosa da lista BOM de insumos
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-sky shrink-0 mt-0.5"></i>
+                                Cronograma físico-financeiro detalhado
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-panel glass-panel-hover rounded-2xl p-8 relative z-10 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-blue/20 to-slate-900 border border-brand-blue/40 flex items-center justify-center text-blue-400 font-black text-xl shadow-glow-blue">
+                                03
+                            </div>
+                            <span class="text-[10px] font-mono font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">ENTREGA TÉCNICA</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Execução e Comissionamento</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Instalação com mão de obra certificada, testes de validação com instrumentação digital de precisão, entrega técnica e suporte contínuo.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                                Instalação física sob severas normas de segurança
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                                Certificação de pontos de rede e ensaios de estresse
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                                Handover com As-Built e SLA de suporte pós-entrega
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROPOSTA DE VALOR & DIFERENCIAIS -->
+    <section id="diferenciais" class="py-20 relative z-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Title Content -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20">
+                        Por Que Escolher a Eletroflux?
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                        Engenharia Integrada com Responsabilidade Corporativa
+                    </h2>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Eliminamos a complexidade de gerenciar múltiplos fornecedores de infraestrutura. Nossa abordagem unificada garante sinergia total entre elétrica, TI, segurança e nuvem.
+                    </p>
+                    
+                    <div class="pt-4">
+                        <button onclick="openModal()" class="px-6 py-3.5 text-sm font-bold text-slate-950 bg-gradient-to-r from-brand-cyan to-brand-blue hover:brightness-110 rounded-xl transition-all shadow-glow-cyan flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            Solicitar Atendimento Técnico
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Differentials Grid -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+                    
+                    <div class="glass-panel p-6 rounded-2xl border-slate-800 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center">
+                            <i data-lucide="check-square" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Transparência Orçamentária (BOM)</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Cotação detalhada de periféricos, ativos e serviços sem custos ocultos ou margens imprecisas.
                         </p>
                     </div>
-                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Prazos de entrega ágeis</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Análise DFM (Design for Mfg)</li>
+
+                    <div class="glass-panel p-6 rounded-2xl border-slate-800 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-sky/10 text-brand-sky flex items-center justify-center">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Zero Impacto Operacional</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Planejamento rigoroso para migrações em nuvem e instalações de hardware com zero paralisação do negócio.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border-slate-800 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Rigor e Conformidade Normativa</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Projetos totalmente alinhados às normas NR-10, NBR 5410, NBR 14565 e padrões internacionais de segurança.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border-slate-800 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                            <i data-lucide="gauge" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Instrumentação Digital de Precisão</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Ensaios e validações efetuados com amostradores digitais de última geração para auditoria comprovada.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GALERIA DE FOTOS EM CAMPO (7 FOTOS EM FILEIRA UNIFICADA) -->
+    <section id="galeria" class="py-20 relative z-10 bg-slate-950/90 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20">
+                    Projetos Executados & Operações em Campo
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Infraestrutura Real em Ação
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Registro de instalações industriais, data centers, centrais de segurança e comissionamentos realizados pela equipe técnica Eletroflux.
+                </p>
+            </div>
+
+            <!-- Row of 7 Photos Container (Responsive Scroll on Mobile, 7-Column Grid on Large Screens) -->
+            <div class="flex lg:grid lg:grid-cols-7 gap-3 sm:gap-4 overflow-x-auto pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-slate-800">
+                
+                <!-- PHOTO 1: Subestação Elétrica -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80', 'Subestações Elétricas & Alta Tensão', 'Consultoria e ensaios operacionais em cabines primárias e subestações industriais sob norma NR-10.', 'Engenharia Elétrica')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" 
+                         alt="Subestação Elétrica" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Subestacao+Eletrica'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">ELÉTRICA</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Subestações Elétricas</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Adequação NR-10 e automação de subestações.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 2: Racks Data Center -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80', 'Racks de Data Center Mission-Critical', 'Montagem, organização de cabeamento e manutenção preventiva de parques tecnológicos corporativos.', 'TI & Hardware')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" 
+                         alt="Data Center Racks" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Data+Center+Racks'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">HARDWARE TI</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Data Centers Tier III</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Gestão total de ativos e servidores.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 3: Cabeamento Fibra Óptica -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80', 'Cabeamento Estruturado & Fibra Óptica', 'Lançamento e certificação de pontos ópticos e Cat6A conforme normas NBR 14565 e ANSI/TIA-568.', 'Redes de Dados')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" 
+                         alt="Cabeamento de Fibra Óptica" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Fibra+Optica'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-brand-cyan border border-cyan-500/30">CABEAMENTO</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Redes de Fibra Óptica</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Backbone de altíssima velocidade.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 4: Central de Monitoramento CFTV -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80', 'Central de Monitoramento & Segurança CFTV', 'Implantação de centrais VMS, videowall e câmeras IP 4K com inteligência artificial para proteção patrimonial.', 'Segurança Eletrônica')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80" 
+                         alt="Central CFTV" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Central+CFTV'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">CFTV / VMS</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Central de CFTV IP</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Vigilância preditiva 24h.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 5: Servidores Cloud -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80', 'Ambientes de Cloud Computing & Nuvem Híbrida', 'Migração de cargas de trabalho empresariais para infraestruturas em nuvem com alta disponibilidade e zero perda de dados.', 'Cloud Computing')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" 
+                         alt="Cloud Infrastructure" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Cloud+Computing'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-sky-500/20 text-brand-sky border border-sky-500/30">CLOUD</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Infraestrutura Cloud</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Migração com zero downtime.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 6: Automação Industrial -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80', 'Automação Operacional & Painéis de Controle', 'Projetos customizados de CLP/SCADA e automação industrial para linhas de produção de alta exigência.', 'Automação')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" 
+                         alt="Automação Industrial" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Automacao+Industrial'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">AUTOMAÇÃO</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Controle & Automação</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Sistemas CLP e painéis SCADA.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHOTO 7: Testes de Carga & Ensaios Digitais -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80', 'Instrumentação Digital & Testes de Carga', 'Verificação técnica avançada com amostradores digitais de precisão para auditorias e certificações de rede.', 'Comissionamento')" 
+                     class="group relative min-w-[220px] sm:min-w-[260px] lg:min-w-0 h-80 rounded-2xl overflow-hidden glass-panel border-slate-800 cursor-pointer snap-start transition-all duration-300 hover:border-brand-cyan/60 hover:shadow-glow-cyan flex-shrink-0">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" 
+                         alt="Testes de Carga e Instrumentação" 
+                         onerror="this.src='https://placehold.co/600x800/0F172A/06B6D4?text=Testes+Digitais'"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 border border-brand-cyan/0 group-hover:border-brand-cyan/40 rounded-2xl transition-all"></div>
+                    <div class="absolute inset-0 p-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">AUDITORIA</span>
+                            <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-brand-cyan/40 flex items-center justify-center text-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1 transform group-hover:translate-y-0 transition-transform">
+                            <h4 class="text-xs font-bold text-white leading-tight">Ensaio Digital & Carga</h4>
+                            <p class="text-[10px] text-slate-300 line-clamp-2">Instrumentação de precisão.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-4 text-center lg:hidden text-xs text-slate-400 flex items-center justify-center gap-1.5">
+                <i data-lucide="move-right" class="w-4 h-4 text-brand-cyan"></i> Deslize para visualizar as 7 fotos da operação
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER CTA BANNER -->
+    <section class="py-16 relative z-10 bg-gradient-to-r from-brand-navy via-slate-900 to-brand-dark border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 border-brand-cyan/30 shadow-2xl">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+                    Pronto para Elevar a Confiabilidade da Sua Infraestrutura?
+                </h2>
+                <p class="text-slate-300 text-base max-w-2xl mx-auto">
+                    Fale com nossos engenheiros especialistas. Receba um diagnóstico preliminar e proposta orçamentária sob medida para sua operação.
+                </p>
+                <div class="pt-2">
+                    <button onclick="openModal()" class="px-8 py-4 text-base font-extrabold text-slate-950 bg-gradient-to-r from-brand-cyan via-brand-sky to-brand-blue hover:brightness-110 rounded-xl transition-all shadow-glow-cyan inline-flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5"></i>
+                        Solicitar Orçamento Agora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSA EQUIPE / MEMBROS DO GRUPO (7 FOTOS EM FILEIRA ESTÁTICA) -->
+    <section id="equipe" class="py-20 relative z-10 bg-slate-950/90 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20">
+                    Capital Humano & Especialistas
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Membros do Grupo & Liderança Técnica
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Nossa equipe multidisciplinar reúne engenheiros, arquitetos de TI e especialistas em segurança dedicados a entregar excelência do projeto ao comissionamento.
+                </p>
+            </div>
+
+            <!-- STATIC 7-MEMBER GRID (No Carousel, No Scroll, Fixed Row) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                
+                <!-- MEMBER 1 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Gabriel+Silva'" 
+                                 alt="Eng. Gabriel Silva" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                                PILAR 01 &bull; ELÉTRICA
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">João Pedro</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Líder</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-amber-400 font-semibold">NR-10 / NBR 5410</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="Mail" class="hover:text-brand-cyan"><i data-lucide="mail" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 2 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Lucas+Costa'" 
+                                 alt="Lucas Costa" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                                PILAR 03 &bull; REDES
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Luan</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente Administrativo</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-brand-cyan font-semibold">CCNA / NBR 14565</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="GitHub" class="hover:text-brand-cyan"><i data-lucide="github" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 3 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Mariana+Santos'" 
+                                 alt="Mariana Santos" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">
+                                PILAR 05 &bull; CLOUD
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Raul</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente de projetos</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-brand-sky font-semibold">AWS / Azure Arch</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="Mail" class="hover:text-brand-cyan"><i data-lucide="mail" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 4 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Rafael+Oliveira'" 
+                                 alt="Rafael Oliveira" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                                AUTOMAÇÃO & IOT
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Arthur Nogueira</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente de IA</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-amber-400 font-semibold">SCADA / PLC Dev</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="GitHub" class="hover:text-brand-cyan"><i data-lucide="github" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 5 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Beatriz+Lima'" 
+                                 alt="Beatriz Lima" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+                                PILAR 04 &bull; CFTV
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Josué</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente de Materiais</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-purple-400 font-semibold">ISO 27001 / VMS</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="Mail" class="hover:text-brand-cyan"><i data-lucide="mail" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 6 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Thiago+Martins'" 
+                                 alt="Thiago Martins" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                                PILAR 02 &bull; TI & HW
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Guilherme de Paiva</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente de TI</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-blue-400 font-semibold">Enterprise HW</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="Mail" class="hover:text-brand-cyan"><i data-lucide="mail" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER 7 -->
+                <div class="glass-panel rounded-2xl p-4 border border-slate-800 hover:border-brand-cyan/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-cyan flex flex-col justify-between group">
+                    <div class="space-y-3 text-center">
+                        <div class="relative w-24 h-24 mx-auto rounded-xl overflow-hidden border-2 border-slate-700 group-hover:border-brand-cyan transition-colors shadow-md">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" 
+                                 onerror="this.src='https://placehold.co/300x300/0f172a/06b6d4?text=Camila+Rocha'" 
+                                 alt="Camila Rocha" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                                PMO & ENGENHARIA
+                            </span>
+                            <h4 class="text-sm font-bold text-white mt-1.5 leading-snug">Gustavo Yvo</h4>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">Gerente de Comunicação</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                        <span class="font-mono text-emerald-400 font-semibold">PMP / Agile PMO</span>
+                        <div class="flex gap-1.5 text-slate-400 hover:text-brand-cyan">
+                            <a href="#" aria-label="LinkedIn" class="hover:text-brand-cyan"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i></a>
+                            <a href="#" aria-label="Mail" class="hover:text-brand-cyan"><i data-lucide="mail" class="w-3.5 h-3.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-slate-400 py-16 border-t border-slate-900 relative z-10 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                
+                <!-- Col 1 & 2: Brand Info -->
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-cyan to-brand-blue p-0.5">
+                            <div class="w-full h-full bg-brand-dark rounded-[10px] flex items-center justify-center text-brand-cyan">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <span class="text-lg font-black text-white tracking-wider">
+                            ELETRO<span class="text-brand-cyan">FLUX</span>
+                        </span>
+                    </a>
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+                        Eletroflux: Transformação Tecnológica e Infraestrutura Integrada. Soluções de alta disponibilidade em engenharia elétrica, TI corporativa, redes estruturadas, CFTV e nuvem.
+                    </p>
+                    
+                    <!-- Standards Badges -->
+                    <div class="pt-2 flex flex-wrap gap-2 text-[10px] font-mono font-bold text-slate-400">
+                        <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">NR-10</span>
+                        <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">NBR 5410</span>
+                        <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">NBR 14565</span>
+                        <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">ANSI/TIA-568</span>
+                        <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">ISO 27001 COMPLIANT</span>
+                    </div>
+                </div>
+
+                <!-- Col 3: Links -->
+                <div class="space-y-3">
+                    <h5 class="text-xs font-bold text-white uppercase tracking-wider">Portfólio</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#servicos" class="hover:text-brand-cyan transition-colors">Engenharia Elétrica & Automação</a></li>
+                        <li><a href="#servicos" class="hover:text-brand-cyan transition-colors">Infraestrutura de TI & Hardware</a></li>
+                        <li><a href="#servicos" class="hover:text-brand-cyan transition-colors">Redes & Cabeamento Estruturado</a></li>
+                        <li><a href="#servicos" class="hover:text-brand-cyan transition-colors">CFTV & Segurança Eletrônica</a></li>
+                        <li><a href="#servicos" class="hover:text-brand-cyan transition-colors">Cloud & Transformação Digital</a></li>
                     </ul>
                 </div>
 
-                <!-- Card 4: Testes & Turnkey -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border
+                <!-- Col 4: Links -->
+                <div class="space-y-3">
+                    <h5 class="text-xs font-bold text-white uppercase tracking-wider">Institucional</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#hero" class="hover:text-brand-cyan transition-colors">Sobre a Eletroflux</a></li>
+                        <li><a href="#metodologia" class="hover:text-brand-cyan transition-colors">Metodologia de Atendimento</a></li>
+                        <li><a href="#calculadora" class="hover:text-brand-cyan transition-colors">Dimensionador de Projeto</a></li>
+                        <li><a href="#diferenciais" class="hover:text-brand-cyan transition-colors">Por Que Escolher</a></li>
+                        <li><a href="#equipe" class="hover:text-brand-cyan transition-colors">Integrantes & Equipe</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 5: Contact Info -->
+                <div class="space-y-3">
+                    <h5 class="text-xs font-bold text-white uppercase tracking-wider">Atendimento B2B</h5>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                            <span>+55 (11) 4003-8920 / 0800-ELETRO</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                            <span>contato@eletroflux.com.br</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                            <span>Av. das Nações Unidas, 14.261 - São Paulo, SP</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                            <span>Seg. a Sex. das 08h às 18h (Plantão 24/7 para SLA)</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400">
+                <p>&copy; <span id="current-year">2026</span> Eletroflux Transformação Tecnológica e Infraestrutura Integrada. Todos os direitos reservados.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-brand-cyan">Termos de Serviço</a>
+                    <span>&bull;</span>
+                    <a href="#" class="hover:text-brand-cyan">Política de Privacidade & LGPD</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MODAL INTERATIVO DE SOLICITAÇÃO DE ORÇAMENTO -->
+    <div id="budget-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl border-slate-700/80 p-6 sm:p-8 shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="modal-container">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Form Content -->
+            <div id="modal-form-content" class="space-y-6">
+                <div>
+                    <span class="text-xs font-mono font-bold text-brand-cyan uppercase tracking-wider">Atendimento Comercial & Engenharia</span>
+                    <h3 class="text-2xl font-extrabold text-white mt-1">Solicitar Orçamento de Projetos</h3>
+                    <p class="text-xs text-slate-300 mt-1">
+                        Preencha os dados abaixo. Nossa equipe de engenharia entrará em contato em até 24 horas úteis.
+                    </p>
+                </div>
+
+    <!-- MODAL LIGHTBOX DE GALERIA EM ALTA RESOLUÇÃO -->
+    <div id="lightbox-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-4xl rounded-3xl border-brand-cyan/40 p-4 sm:p-6 relative shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col space-y-4" id="lightbox-container">
+            
+            <!-- Close Button -->
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-slate-900/90 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors border border-slate-700">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Lightbox Image Display -->
+            <div class="relative w-full h-[55vh] sm:h-[65vh] rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-800">
+                <img id="lightbox-img" src="" alt="Ampliação da Imagem" class="w-full h-full object-contain">
+                <div class="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono text-brand-cyan font-semibold flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                    <span id="lightbox-tag">ENGENHARIA ELETROFLUX</span>
+                </div>
+            </div>
+
+            <!-- Lightbox Information -->
+            <div class="space-y-1.5 px-2">
+                <h3 id="lightbox-title" class="text-xl font-extrabold text-white"></h3>
+                <p id="lightbox-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC INTEGRATION -->
+    <script>
+        // Initialize Lucide Icons on DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initHeroCanvas();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+
+        /* --- MOBILE MENU TOGGLE --- */
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        mobileBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
+        });
+
+        /* --- SERVICES TAB FILTERING --- */
+        function filterServices(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.service-card');
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.classList.add('bg-brand-cyan', 'text-brand-dark', 'shadow-glow-cyan');
+                    btn.classList.remove('text-slate-300', 'bg-slate-900');
+                } else {
+                    btn.classList.remove('bg-brand-cyan', 'text-brand-dark', 'shadow-glow-cyan');
+                    btn.classList.add('text-slate-300', 'bg-slate-900');
+                }
+            });
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category || cardCat === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        /* --- INTERACTIVE CALCULATOR STATE & LOGIC --- */
+        let currentCalcEnv = 'corporativo';
+
+        function setCalcEnv(env) {
+            currentCalcEnv = env;
+            document.querySelectorAll('.calc-env-btn').forEach(btn => {
+                if (btn.getAttribute('data-env') === env) {
+                    btn.classList.add('border-brand-cyan', 'bg-brand-cyan/20', 'text-white');
+                    btn.classList.remove('border-slate-800', 'bg-slate-950/80', 'text-slate-400');
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.classList.replace('text-slate-400', 'text-brand-cyan');
+                } else {
+                    btn.classList.remove('border-brand-cyan', 'bg-brand-cyan/20', 'text-white');
+                    btn.classList.add('border-slate-800', 'bg-slate-950/80', 'text-slate-400');
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.classList.replace('text-brand-cyan', 'text-slate-400');
+                }
+            });
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const scaleVal = parseInt(document.getElementById('calc-scale').value);
+            const scaleLabel = document.getElementById('calc-scale-label');
+            
+            const powerRes = document.getElementById('res-power');
+            const cablingRes = document.getElementById('res-cabling');
+            const cctvRes = document.getElementById('res-cctv');
+            const timeRes = document.getElementById('res-time');
+
+            // Scale Text Mapping
+            const scaleMap = {
+                1: 'Pequeno Porte (Até 50 Posições / 300m²)',
+                2: 'Médio Porte (50 - 150 Posições / 1.000m²)',
+                3: 'Grande Porte (150 - 500 Posições / 3.000m²)',
+                4: 'Enterprise / Industrial (>500 Posições / Plantas Industriais)'
+            };
+            scaleLabel.textContent = scaleMap[scaleVal];
+
+            // Dynamic Estimates
+            if (scaleVal === 1) {
+                powerRes.textContent = '15 kVA Nobreak Dedicado';
+                cablingRes.textContent = '40 Pontos Cat6 Executados';
+                cctvRes.textContent = '8 Câmeras Full HD + VMS';
+                timeRes.textContent = '5 a 10 Dias Úteis';
+            } else if (scaleVal === 2) {
+                powerRes.textContent = '45 kVA Subestação / UPS Redundante';
+                cablingRes.textContent = '120 Pontos Cat6A Certificados';
+                cctvRes.textContent = '16 Câmeras 4K com IA';
+                timeRes.textContent = '15 a 25 Dias Úteis';
+            } else if (scaleVal === 3) {
+                powerRes.textContent = '120 kVA Grupo Gerador / QTA';
+                cablingRes.textContent = '350 Pontos Ópticos + Cat6A';
+                cctvRes.textContent = '48 Câmeras LPR / PTZ';
+                timeRes.textContent = '30 a 45 Dias Úteis';
+            } else {
+                powerRes.textContent = '+300 kVA Subestação Dedicada';
+                cablingRes.textContent = '+1.000 Pontos Backbone Fibra';
+                cctvRes.textContent = '+100 Câmeras Analytics VMS';
+                timeRes.textContent = 'Projeto Customizado / Fases';
+            }
+        }
+
+        function exportCalcToModal() {
+            const scaleText = document.getElementById('calc-scale-label').textContent;
+            const notes = `[Orçamento Gerado via Simulador Eletroflux]\nAmbiente: ${currentCalcEnv.toUpperCase()}\nPorte: ${scaleText}\nRequisitos: Elétrica, Redes e Automação integrados.`;
+            
+            document.getElementById('project-notes').value = notes;
+            document.getElementById('service-select').value = 'Projeto Turnkey Completo (Todos os Pilares)';
+            openModal();
+            showToast('Dados do dimensionador importados com sucesso!', 'info');
+        }
+
+        /* --- MODAL CONTROLS --- */
+        const modal = document.getElementById('budget-modal');
+        const modalContainer = document.getElementById('modal-container');
+        const formContent = document.getElementById('modal-form-content');
+        const successContent = document.getElementById('modal-success-content');
+
+        function openModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContainer.classList.remove('scale-95');
+            modalContainer.classList.add('scale-100');
+        }
+
+        function openModalWithService(serviceName) {
+            const select = document.getElementById('service-select');
+            select.value = serviceName;
+            openModal();
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContainer.classList.remove('scale-100');
+            modalContainer.classList.add('scale-95');
+            setTimeout(() => {
+                formContent.classList.remove('hidden');
+                successContent.classList.add('hidden');
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        /* --- FORM SUBMISSION --- */
+        function handleQuoteSubmit(event) {
+            event.preventDefault();
+
+            const company = document.getElementById('company-name').value;
+            const name = document.getElementById('contact-name').value;
+            const service = document.getElementById('service-select').value;
+
+            // Generate Random Protocol
+            const randomCode = 'ELF-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+            
+            document.getElementById('protocol-id').textContent = randomCode;
+            document.getElementById('summary-company').textContent = company;
+            document.getElementById('summary-name').textContent = name;
+            document.getElementById('summary-service').textContent = service;
+
+            formContent.classList.add('hidden');
+            successContent.classList.remove('hidden');
+
+            document.getElementById('quote-form').reset();
+            showToast('Orçamento enviado com sucesso!', 'success');
+        }
+
+        /* --- LIGHTBOX MODAL FUNCTIONS --- */
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxContainer = document.getElementById('lightbox-container');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDesc = document.getElementById('lightbox-desc');
+        const lightboxTag = document.getElementById('lightbox-tag');
+
+        function openLightbox(src, title, desc, tag) {
+            lightboxImg.src = src;
+            lightboxTitle.textContent = title;
+            lightboxDesc.textContent = desc;
+            lightboxTag.textContent = tag || 'PROJETO EM CAMPO';
+
+            lightboxModal.classList.remove('opacity-0', 'pointer-events-none');
+            lightboxContainer.classList.remove('scale-95');
+            lightboxContainer.classList.add('scale-100');
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+            lightboxContainer.classList.remove('scale-100');
+            lightboxContainer.classList.add('scale-95');
+        }
+
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeLightbox();
+            }
+        });
+
+        /* --- CUSTOM TOAST SYSTEM --- */
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl backdrop-blur-md text-xs font-semibold text-white border transition-all duration-300 transform translate-y-5 opacity-0 ${
+                type === 'success' ? 'bg-slate-900/90 border-emerald-500/50 text-emerald-300' : 'bg-slate-900/90 border-brand-cyan/50 text-brand-sky'
+            }`;
+
+            toast.innerHTML = `
+                <i data-lucide="${type === 'success' ? 'check-circle' : 'info'}" class="w-4 h-4 text-brand-cyan"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-5', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        /* --- HERO CANVAS BACKGROUND ANIMATION --- */
+        function initHeroCanvas() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            const particleCount = Math.min(Math.floor(width / 25), 45);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw Connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Draw Dots
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = '#06B6D4';
+                    ctx.fill();
+
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
