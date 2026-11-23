@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EletroFlux | Outsourcing e Montagem de Circuitos Eletrônicos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0A192F',
+                            navy: '#0E2A47',
+                            blue: '#0052CC',
+                            light: '#00A3FF',
+                            accent: '#00E5FF',
+                            slate: '#F4F7FA',
+                            text: '#1E293B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .circuit-bg {
+            background-color: #0A192F;
+            background-image: radial-gradient(#00A3FF 0.75px, transparent 0.75px), radial-gradient(#00A3FF 0.75px, #0A192F 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            background-opacity: 0.05;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(0, 163, 255, 0.3);
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 35px 0px rgba(0, 163, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-light selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800 text-white transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10 flex items-center justify-center bg-brand-navy rounded-lg border border-brand-light/30 group-hover:border-brand-light transition-all">
+                        <!-- Custom SVG Circuit/Flux Icon based on generated concept -->
+                        <svg class="w-6 h-6 text-brand-light transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12h4l2-3 3 6 3-6 2 3h4" />
+                            <circle cx="6" cy="12" r="1" fill="currentColor"/>
+                            <circle cx="18" cy="12" r="1" fill="currentColor"/>
+                            <circle cx="12" cy="9" r="1.5" class="text-brand-accent" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-extrabold tracking-tight text-white leading-none">ELETRO<span class="text-brand-light">FLUX</span></span>
+                        <span class="text-[10px] font-medium tracking-widest text-slate-400 uppercase mt-0.5">Circuit Assembly</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAV -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#solucoes" class="text-slate-300 hover:text-brand-light transition-colors">Soluções</a>
+                    <a href="#diferenciais" class="text-slate-300 hover:text-brand-light transition-colors">Diferenciais</a>
+                    <a href="#processo" class="text-slate-300 hover:text-brand-light transition-colors">Processo EMS</a>
+                    <a href="#capacidade" class="text-slate-300 hover:text-brand-light transition-colors">Capacidade</a>
+                    <a href="#orcamento" class="text-slate-300 hover:text-brand-light transition-colors">Solicitar Orçamento</a>
+                </nav>
+
+                <!-- HEADER CTA -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#orcamento" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-blue hover:bg-brand-light rounded-lg shadow-lg shadow-brand-blue/30 transition-all duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Cotar Lote B2B
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU BUTTON -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE NAV MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#solucoes" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Soluções</a>
+            <a href="#diferenciais" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Diferenciais</a>
+            <a href="#processo" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Processo EMS</a>
+            <a href="#capacidade" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Capacidade</a>
+            <a href="#orcamento" class="block w-full text-center mt-4 px-5 py-3 text-sm font-semibold text-white bg-brand-blue rounded-lg shadow-md">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-brand-dark text-white overflow-hidden py-20 lg:py-28 circuit-bg border-b border-slate-800">
+        <!-- Glow accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-light/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- HERO TEXT -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-navy border border-brand-light/30 text-brand-light text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                        Manufatura de Eletrônicos por Contrato (EMS)
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Especialistas na <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-light to-brand-accent">Montagem Precision</span> de Placas Eletrônicas
+                    </h1>
+
+                    <p class="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Terceirização industrial completa para a sua empresa. Da prototipagem rápida à montagem em grande escala SMT e THT com rigoroso controle de qualidade IPC-A-610.
+                    </p>
+
+                    <!-- CTA BUTTONS -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#orcamento" class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-brand-blue hover:bg-brand-light rounded-xl shadow-lg shadow-brand-blue/40 transition-all duration-300 flex items-center justify-center gap-2 group">
+                            Enviar Projeto para Cotação
+                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#solucoes" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700 rounded-xl transition-all duration-200 text-center">
+                            Conhecer Nossos Serviços
+                        </a>
+                    </div>
+
+                    <!-- TRUST METRICS -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-800/80">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">99.8%</p>
+                            <p class="text-xs text-slate-400 mt-1">Taxa de Qualidade (Yield)</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-brand-light">+500k</p>
+                            <p class="text-xs text-slate-400 mt-1">Componentes/Dia</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white">ISO 9001</p>
+                            <p class="text-xs text-slate-400 mt-1">Padrão Certificado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HERO GRAPHIC CARD -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-b from-slate-900 to-brand-navy p-6 sm:p-8 rounded-2xl border border-slate-700/60 shadow-2xl">
+                        
+                        <!-- Header badge -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                <span class="text-xs font-mono text-slate-300">LINHA_DE_MONTAGEM_01: ATIVA</span>
+                            </div>
+                            <span class="text-xs text-brand-light font-semibold">Tecnologia SMT/PTH</span>
+                        </div>
+
+                        <!-- Circuit Visual Schematic simulation -->
+                        <div class="bg-brand-dark/90 p-5 rounded-xl border border-slate-800 space-y-4 font-mono text-xs text-slate-300 mb-6">
+                            <div class="flex justify-between items-center text-slate-400 border-b border-slate-800/50 pb-2">
+                                <span>PARÂMETRO</span>
+                                <span>ESPECIFICAÇÃO</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Tecnologia:</span>
+                                <span class="text-white font-semibold">SMD 0201 até BGA/QFN</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Inspeção Óptica:</span>
+                                <span class="text-brand-light font-semibold">AOI 3D Automática</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Capacidade THT:</span>
+                                <span class="text-white font-semibold">Soldagem Dupla Onda</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Conformidade:</span>
+                                <span class="text-emerald-400 font-semibold">IPC-A-610 Classe 2 e 3</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick feature list -->
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-light shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-300">Gerenciamento completo da cadeia de suprimentos de componentes (BOM).</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-light shrink-0 mt-0.5"></i>
+                                <p class="text-sm text-slate-300">Testes funcionais (FCT) e In-Circuit (ICT) dedicados ao seu produto.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGOS DE CLIENTES / PARCEIROS -->
+    <section class="py-8 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wider mb-6">Atendendo indústrias exigentes em todo o Brasil</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="cpu" class="w-5 h-5"></i> AUTOMOTIVA</span>
+                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="wifi" class="w-5 h-5"></i> TELECOM</span>
+                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="activity" class="w-5 h-5"></i> MEDTECH</span>
+                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5"></i> ENERGIA</span>
+                <span class="text-slate-300 font-bold text-lg tracking-wider flex items-center gap-2"><i data-lucide="bot" class="w-5 h-5"></i> AUTOMAÇÃO</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS / SOLUÇÕES -->
+    <section id="solucoes" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-extrabold text-brand-blue uppercase tracking-widest mb-2">Nossas Soluções EMS</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Serviços de Manufatura de Circuitos sob Medida</p>
+                <p class="text-slate-600 mt-4 text-lg">Oferecemos soluções completas para terceirização da montagem dos seus produtos eletroeletrônicos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Card 1: Montagem SMT -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                            <i data-lucide="microchip" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Montagem SMT</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Linhas pick-and-place automáticas de alta velocidade para montagem em superfície (SMD), componentes de micro-precisão e encapsulamentos BGA.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Componentes a partir de 0201</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Fornos de Refluxo Multizona</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Montagem THT/PTH -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                            <i data-lucide="layers" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Montagem THT / PTH</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Inserção e soldagem convencional através de furo passante com máquinas de solda a onda controladas e operadores treinados.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Soldagem Dupla Onda</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Montagens Mistas (SMD + THT)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Prototipagem Rápida -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border-brand-light hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-navy rounded-xl flex items-center justify-center text-brand-light mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                            <i data-lucide="zap" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Prototipagem Rápida</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Produção express de pequenos lotes para testes e validação de projeto (NPI - New Product Introduction) em prazos reduzidos.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-500 space-y-2 border-t border-slate-200 pt-4 font-medium">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Prazos de entrega ágeis</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-brand-blue mr-1.5"></i> Análise DFM (Design for Mfg)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Testes & Turnkey -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:border
